@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28701.123
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UtahSnowReport", "UtahSnowReport\UtahSnowReport.csproj", "{B3C17C65-67D2-4031-8245-CCC4D882A0D6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UtahSnowReport.Tests", "UtahSnowReport.Tests\UtahSnowReport.Tests.csproj", "{922673F5-8D8D-4756-9D4F-43F26E376054}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B3C17C65-67D2-4031-8245-CCC4D882A0D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3C17C65-67D2-4031-8245-CCC4D882A0D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3C17C65-67D2-4031-8245-CCC4D882A0D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3C17C65-67D2-4031-8245-CCC4D882A0D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{922673F5-8D8D-4756-9D4F-43F26E376054}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{922673F5-8D8D-4756-9D4F-43F26E376054}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{922673F5-8D8D-4756-9D4F-43F26E376054}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{922673F5-8D8D-4756-9D4F-43F26E376054}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4A3F7912-A8AD-44E3-B68E-D2490770506F}
+	EndGlobalSection
+EndGlobal
