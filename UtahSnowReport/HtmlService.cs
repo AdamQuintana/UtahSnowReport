@@ -1,10 +1,14 @@
 ﻿using HtmlAgilityPack;
-using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Text;
+using System.Net;
+using System.Net.Http;
+using System.Net.Security;
+using System.Security.Cryptography.X509Certificates;
+using System.Threading.Tasks;
 
 namespace UtahSkiConditions
 {
@@ -13,6 +17,7 @@ namespace UtahSkiConditions
         T48HrReport Build48HrReport();
         List<TMinus24hrData> GetTMinus24HrData();
         List<TPlus24hrData> GetTPlus24HrData();
+        Stream DownloadExpectedSnowFallImage();
     }
     public class HtmlService : IHtmlService
     {
@@ -154,6 +159,24 @@ namespace UtahSkiConditions
             }
 
             return data;
+        }
+
+        public Stream DownloadExpectedSnowFallImage()
+        {
+            Uri uri = new Uri(@"https://www.weather.gov/images/slc/winter/StormTotalSnowWeb1.png");
+            //WebClient client = new WebClient();
+            //return client.OpenRead(uri);
+
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
+            request.ServerCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => true;
+            request.Accept = @"image/png";
+            request.Referer = @"http://www.somesite.com/";
+            request.Headers.Add("Accept-Language", "en-GB");
+            request.UserAgent = @"Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0)";
+            request.Host = @"www.somesite.com";
+            WebResponse response = request.GetResponse();
+            return response.GetResponseStream();
         }
     }
 }
