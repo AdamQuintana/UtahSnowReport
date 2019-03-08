@@ -5,7 +5,7 @@ using System.IO;
 using System.Net;
 using System.Net.Mail;
 
-namespace UtahSkiConditions
+namespace UtahSnowReport
 {
     public interface IEmailService
     {

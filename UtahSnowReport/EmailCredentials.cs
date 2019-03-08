@@ -1,5 +1,5 @@
 ﻿
-namespace UtahSkiConditions
+namespace UtahSnowReport
 {
     public class EmailCredentials
     {

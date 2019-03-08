@@ -6,7 +6,7 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace UtahSkiConditions
+namespace UtahSnowReport
 {
     class Program
     {

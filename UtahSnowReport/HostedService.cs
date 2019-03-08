@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace UtahSkiConditions
+namespace UtahSnowReport
 {
     public class HostedService : Microsoft.Extensions.Hosting.IHostedService
     {
