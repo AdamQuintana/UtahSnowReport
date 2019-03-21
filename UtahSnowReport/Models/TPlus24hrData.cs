@@ -4,21 +4,32 @@ using System.Text;
 
 namespace UtahSnowReport
 {
-    public class TMinus24hrData
+    public class TPlus24hrData
     {
+        public static DateTime RangeStartTime { get; set; }
+        public static DateTime RangeStopTime { get; set; }
         public int Id { get; set; }
-        public string ResortName { get; set; }
         public DateTime SampledTime { get; set; }
+        public string ResortName { get; set; }
         public int Snow24hr_in { get; set; }
-        public int SnowDepth_in { get; set; }
-        public DateTime UpdatedTime { get; set; }
 
+        public bool IsValid()
+        {
+            return DateTime.Now >= RangeStartTime && DateTime.Now <= RangeStopTime && Snow24hr_in > 0;
+        }
         public static string HtmlHeader()
         {
-            var columnNames = new List<string>() { "Resort", "Snowfall (in)", "Total Snow Depth (in)" };
+            var columnNames = new List<string>() { "Resort", "Snowfall (in)" };
             StringBuilder builder = new StringBuilder();
 
-            builder.Append("<h2>T - 24 Hr Snowfall</h2>");
+            builder.Append("<h2>T + 24 Hr Snowfall</h2>");
+            builder.AppendLine();
+
+            builder.Append("<h3>");
+            builder.Append(RangeStartTime.ToString("d"));
+            builder.Append(" - ");
+            builder.Append(RangeStopTime.ToString("d"));
+            builder.Append("</h3>");
             builder.AppendLine();
 
             builder.Append("<table  style=\"width:100%\">");
@@ -48,9 +59,6 @@ namespace UtahSnowReport
             builder.AppendLine();
 
             builder.AppendFormat("<td>{0}</td>", Snow24hr_in);
-            builder.AppendLine();
-
-            builder.AppendFormat("<td>{0}</td>", SnowDepth_in);
             builder.AppendLine();
 
             builder.Append("</tr>");

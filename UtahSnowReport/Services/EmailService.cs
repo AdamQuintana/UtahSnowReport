@@ -9,7 +9,7 @@ namespace UtahSnowReport
 {
     public interface IEmailService
     {
-        bool SendAll(string subject, string content, List<string> recipients, Stream imageStream);
+        bool SendAll(string subject, string content, List<string> recipients);
     }
 
     public class EmailService : IEmailService
@@ -30,7 +30,7 @@ namespace UtahSnowReport
             };
         }
 
-        private MailMessage BuildMessage(string subject, string content, Stream imageStream)
+        private MailMessage BuildMessage(string subject, string content)
         {
             var msg = new MailMessage()
             {
@@ -39,16 +39,16 @@ namespace UtahSnowReport
                 Subject = subject,
                 Body = content,
             };
-            msg.Attachments.Add(new Attachment(imageStream, "image/png"));
+            //msg.Attachments.Add(new Attachment(imageStream, "image/png"));
             return msg;
         }
 
-        public bool SendAll(string subject, string content, List<string> recipients, Stream imageStream)
+        public bool SendAll(string subject, string content, List<string> recipients)
         {
             if (recipients == null || recipients.Count == 0)
                 throw new ArgumentException("recipients");
 
-            MailMessage msg = BuildMessage(subject, content, imageStream);
+            MailMessage msg = BuildMessage(subject, content);
             foreach (string recipient in recipients)
             {
                 var toEmail = new MailAddress(recipient);

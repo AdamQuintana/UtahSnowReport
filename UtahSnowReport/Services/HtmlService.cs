@@ -66,8 +66,8 @@ namespace UtahSnowReport
             //find timestamp node
             var timeStampNode = htmlDoc.GetElementbyId(WeatherGov_Timestamp_Id);
             var timeStampWords = timeStampNode.InnerText.Split(" ");
-            var rangeStartTime = DateTime.TryParse(timeStampWords[0] + " 05:00:00 AM", out DateTime timestamp1) ? timestamp1 : DateTime.UnixEpoch;
-            var rangeStopTime = DateTime.TryParse(timeStampWords[3] + " 05:00:00 AM", out DateTime timestamp2) ? timestamp2 : DateTime.UnixEpoch;
+            TPlus24hrData.RangeStartTime = DateTime.TryParse(timeStampWords[0] + " 05:00:00 AM", out DateTime timestamp1) ? timestamp1 : DateTime.UnixEpoch;
+            TPlus24hrData.RangeStopTime = DateTime.TryParse(timeStampWords[3] + " 05:00:00 AM", out DateTime timestamp2) ? timestamp2 : DateTime.UnixEpoch;
 
             List<TPlus24hrData> data = new List<TPlus24hrData>();
             foreach (KeyValuePair<string, string> resort_value in WeatherGov_Resorts_Values)
@@ -84,10 +84,6 @@ namespace UtahSnowReport
                 var snow24Node = resortNode.NextSibling.NextSibling;
                 string snow24Text = snow24Node.InnerHtml;
                 datum.Snow24hr_in = int.TryParse(snow24Text, out int temp1) ? temp1 : 0;
-
-                //apply timestamp range
-                datum.RangeStartTime = rangeStartTime;
-                datum.RangeStopTime = rangeStopTime;
 
                 //timestamp this sample
                 datum.SampledTime = DateTime.Now;

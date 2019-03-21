@@ -18,12 +18,14 @@ namespace UtahSnowReport
         public Task StartAsync(CancellationToken cancellationToken)
         {
             var report = _htmlService.Build48HrReport();
-            //var stream = _htmlService.DownloadExpectedSnowFallImage();
-            List<string> recipients = new List<string>
+            if (report.IsValid())
             {
-                "adam.quintana@gmail.com"
-            };
-            _emailService.SendAll("Utah Snow Report", report.ToHtml(), recipients, stream);
+                List<string> recipients = new List<string>
+                {
+                    "adam.quintana@gmail.com"
+                };
+                _emailService.SendAll("Utah Snow Report", report.ToHtml(), recipients);
+            }
             return Task.CompletedTask;
         }
 

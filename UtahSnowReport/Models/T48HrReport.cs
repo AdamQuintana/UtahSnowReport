@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace UtahSnowReport
@@ -10,6 +11,11 @@ namespace UtahSnowReport
         public List<TMinus24hrData> TMinus24HrData { get; set; }
         public List<TPlus24hrData> TPlus24HrData { get; set; }
         public DateTime TimeStamp { get; set; }
+
+        public bool IsValid()
+        {
+            return TMinus24HrData.Any(d => d.IsValid()) || TPlus24HrData.Any(d => d.IsValid());
+        }
 
         public string ToHtml()
         {
@@ -47,7 +53,10 @@ namespace UtahSnowReport
             builder.Append(TMinus24hrData.HtmlHeader());
             foreach (var tMinusData in TMinus24HrData)
             {
-                builder.Append(tMinusData.ToHtml());
+                if (tMinusData.IsValid())
+                {
+                    builder.Append(tMinusData.ToHtml());
+                }
             }
             builder.Append(TMinus24hrData.HtmlFooter());
 
@@ -57,7 +66,10 @@ namespace UtahSnowReport
             builder.Append(TPlus24hrData.HtmlHeader());
             foreach (var tPlusData in TPlus24HrData)
             {
-                builder.Append(tPlusData.ToHtml());
+                if (tPlusData.IsValid())
+                {
+                    builder.Append(tPlusData.ToHtml());
+                }
             }
             builder.Append(TPlus24hrData.HtmlFooter());
 
